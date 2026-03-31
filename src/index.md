@@ -6,9 +6,9 @@ toc: false
 <style>
   body { background-color: #0a1628; }
   .card { background-color: #112240; }
-</style>
+</style>  
 
-# Emisiones Tóxicas en Puerto Rico 1987-2024
+# Panel de Control de Emisiones Tóxicas en Puerto Rico 1987-2024
 
 **Fuente:** https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present
 ```js
@@ -47,6 +47,23 @@ const data = datosCrudos.select({
   "23. INDUSTRY SECTOR": "INDUSTRY",
   "37. CHEMICAL": "CHEMICAL"
 });
+```
+```js
+const totalEmisiones = data.numRows();
+
+const topCity = data
+  .groupby("CITY")
+  .rollup({ count: op.count() })
+  .orderby(aq.desc("count"))
+  .object(0);
+
+const topIndustry = data
+  .groupby("INDUSTRY")
+  .rollup({ count: op.count() })
+  .orderby(aq.desc("count"))
+  .object(0);
+
+const topCityPct = ((topCity.count / totalEmisiones) * 100).toFixed(2);
 ```
 ```js
 const industryColors = {
@@ -185,6 +202,20 @@ function createMap(data, zoom, showLegend) {
   return wrapper;
 }
 ```
+
+<div class="grid grid-cols-3">
+  <div class="card">
+    <h2>AÑO: <span style="color:red;">${year}</span></h2>
+  </div>
+  <div class="card">
+    <h3>La mayor cantidad de casos ocurrieron en: <span style="color:red;">${topCity.CITY}</span></h3>
+    <p>${topCity.count} de un total de ${totalEmisiones} para un <span style="color:red;">${topCityPct}%</span></p>
+  </div>
+  <div class="card">
+    <h3>Sector Industrial:</h3>
+    <h2 style="color:red;">${topIndustry.INDUSTRY}</h2>
+  </div>
+</div>
 
 <div class="grid grid-cols-3">
   <div class="card grid-colspan-2" style="min-height:850px;">${createMap(data, zoom, showLegend)}</div>
