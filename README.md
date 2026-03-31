@@ -1,59 +1,58 @@
-# Emisiones Tóxicas en Puerto Rico
+# Toxic App - Emisiones Tóxicas en Puerto Rico
 
-This is an [Observable Framework](https://observablehq.com/framework/) app. To install the required dependencies, run:
+## Descripción
+Aplicación web interactiva desarrollada en Observable Framework que visualiza 
+los datos del Inventario de Emisiones Tóxicas (TRI) de Puerto Rico desde 1987 
+hasta 2024, obtenidos de la Agencia de Protección Ambiental de los Estados 
+Unidos (EPA).
 
-```
+**Fuente de datos:** https://www.epa.gov/toxics-release-inventory-tri-program/tri-basic-data-files-calendar-years-1987-present
+
+## Objetivo
+El objetivo principal de esta aplicación es permitir al usuario explorar y 
+analizar las emisiones tóxicas reportadas en Puerto Rico de manera visual e 
+interactiva. La aplicación facilita identificar patrones por municipio, sector 
+industrial y químico a través del tiempo.
+
+## Funcionalidades
+- **Mapa interactivo** con la localización de cada emisión tóxica en Puerto Rico
+- **Colores por sector industrial** para identificar visualmente el tipo de industria
+- **Popup informativo** al hacer click en cada punto del mapa con:
+  - Año
+  - Municipio
+  - Nombre de la Facilidad
+  - Sector Industrial
+  - Químico
+- **Selector de año** (1987-2024) para explorar datos históricos
+- **Slider de zoom** para ajustar el nivel de detalle del mapa
+- **Leyenda interactiva** con opción de mostrar/ocultar
+- **Histograma de municipios** con los 20 municipios con más emisiones
+- **Histograma de sectores industriales** con la distribución por industria
+
+## Tecnologías Utilizadas
+- **Observable Framework** - generador de sitios estáticos
+- **Arquero** - manipulación y procesamiento de datos
+- **Observable Plot** - visualización de histogramas
+- **Leaflet.js** - mapa interactivo
+- **Mapbox** - tiles del mapa satelital
+
+## Proceso de Desarrollo
+El desarrollo de esta aplicación se realizó en varias versiones:
+
+1. **Versión 1** - Tres histogramas básicos (municipio, sector industrial y químico)
+2. **Versión 2** - Se añadió el mapa interactivo con leyenda
+3. **Versión 3** - Se añadió selector de año, zoom del mapa y toggle de leyenda
+4. **Versión Final** - Diseño completo con layout optimizado, integración de 
+   datos históricos 1987-2024 y mejoras estéticas
+
+## Cómo ejecutar localmente
+```bash
 npm install
-```
-
-Then, to start the local preview server, run:
-
-```
 npm run dev
 ```
 
-Then visit <http://localhost:3000> to preview your app.
-
-For more, see <https://observablehq.com/framework/getting-started>.
-
-## Project structure
-
-A typical Framework project looks like this:
-
-```ini
-.
-├─ src
-│  ├─ components
-│  │  └─ timeline.js           # an importable module
-│  ├─ data
-│  │  ├─ launches.csv.js       # a data loader
-│  │  └─ events.json           # a static data file
-│  ├─ example-dashboard.md     # a page
-│  ├─ example-report.md        # another page
-│  └─ index.md                 # the home page
-├─ .gitignore
-├─ observablehq.config.js      # the app config file
-├─ package.json
-└─ README.md
+## Deployment
+La aplicación está desplegada en:
 ```
-
-**`src`** - This is the “source root” — where your source files live. Pages go here. Each page is a Markdown file. Observable Framework uses [file-based routing](https://observablehq.com/framework/project-structure#routing), which means that the name of the file controls where the page is served. You can create as many pages as you like. Use folders to organize your pages.
-
-**`src/index.md`** - This is the home page for your app. You can have as many additional pages as you’d like, but you should always have a home page, too.
-
-**`src/data`** - You can put [data loaders](https://observablehq.com/framework/data-loaders) or static data files anywhere in your source root, but we recommend putting them here.
-
-**`src/components`** - You can put shared [JavaScript modules](https://observablehq.com/framework/imports) anywhere in your source root, but we recommend putting them here. This helps you pull code out of Markdown files and into JavaScript modules, making it easier to reuse code across pages, write tests and run linters, and even share code with vanilla web applications.
-
-**`observablehq.config.js`** - This is the [app configuration](https://observablehq.com/framework/config) file, such as the pages and sections in the sidebar navigation, and the app’s title.
-
-## Command reference
-
-| Command           | Description                                              |
-| ----------------- | -------------------------------------------------------- |
-| `npm install`            | Install or reinstall dependencies                        |
-| `npm run dev`        | Start local preview server                               |
-| `npm run build`      | Build your static site, generating `./dist`              |
-| `npm run deploy`     | Deploy your app to Observable                            |
-| `npm run clean`      | Clear the local data loader cache                        |
-| `npm run observable` | Run commands like `observable help`                      |
+https://cdat.uprh.edu/~rafael.vega19/toxic-app
+```
